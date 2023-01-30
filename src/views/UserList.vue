@@ -23,7 +23,9 @@
             :key="n"
             cols="4"
           >
-            <v-card height="200"></v-card>
+          <router-link :to="{path:'/about',query:{user_id:n}}">
+            <v-avatar  color="grey lighten-2" size="128"></v-avatar>
+          </router-link>
           </v-col>
         </v-row>
       </v-container>
