@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import UserList from '../views/UserList.vue'
+import ChatBoard from '../views/ChatBoard.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,11 @@ const routes = [
     path: '/',
     name: 'UserList',
     component: UserList
+  },
+  {
+    path: '/chat',
+    name: 'ChatBoard',
+    component: ChatBoard
   },
   {
     path: '/about',
