@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <SideBar />
     <v-main>
       <v-container class="py-8 px-6" fluid>
         <v-row>
@@ -15,7 +16,7 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <!-- <v-list-item-title>Message {{ n }}</v-list-item-title> -->
+                      <!-- <v-list-item-title>Message {{ data }}</v-list-item-title> -->
 
                       <v-list-item-subtitle class="message">
                         {{ data.message }}
@@ -24,8 +25,7 @@
                   </v-list-item>
 
                   <v-divider
-                    v-if="n !== 6"
-                    :key="`divider-${n}`"
+                    v-if="data !== 6"
                     inset
                   ></v-divider>
                 </template>
@@ -58,18 +58,26 @@
 </template>
 
 <script>
+import firebase from '@/firebase/firebase';
+import SideBar from '@/components/layouts/SideBar.vue';
 export default {
-  created() {
+  components:{
+    SideBar
+  },
+  async created() {
     this.user_id = this.$route.query.user_id;
     console.log(this.user_id);
+    const chatRef=firebase.firestore().collection("chats");
+    console.log(chatRef);
+
+    const snapshot=await chatRef.get()
+    console.log(snapshot,'snap')
+    snapshot.forEach(doc=>
+    this.messages.push(doc.data()))
+
   },
   data: () => ({
-    messages:[
-      {message:"message1"},
-      {message:"message2"},
-      {message:"message3"},
-      {message:"message4"},
-  ],
+    messages:[],
     body:"",
     user_id: "",
     cards: ["Today"],
