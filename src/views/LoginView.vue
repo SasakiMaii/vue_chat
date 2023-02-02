@@ -44,6 +44,7 @@
 
 <script>
 import firebase from 'firebase';
+
 export default {
   data: () => ({
     valid: true,
@@ -85,6 +86,17 @@ export default {
       firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(res=>{
         console.log('success')
         console.log(res)
+        console.log(res.user)
+
+        const auth={
+          displayName:res.user.displayName,
+          email:res.user.email,
+          uid:res.user.uid,
+          refreshToken:res.user.refreshToken,
+          photoURL:res.user.photoURL
+        }
+        console.log(auth)
+        sessionStorage.setItem('user',JSON.stringify(auth))
         this.$router.push('/')
       }).catch(err=>{
         console.log(err,'エラー')

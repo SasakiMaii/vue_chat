@@ -91,8 +91,12 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
-        .then((res) => {
+        .then(async(res) => {
           console.log("success", res);
+          await res.user.updateProfile(
+            {displayName:this.name}
+          )
+          console.log(res.user)
           localStorage.message = "新規作成に成功しました";
           this.$router.push("/login");
         })
