@@ -1,6 +1,7 @@
 
   <template>
   <v-app id="inspire">
+    <SideBar />
     <v-app-bar
       app
       shrink-on-scroll
@@ -36,10 +37,11 @@
 
 <script>
 // @ is an alias to /src
-
+import SideBar from '@/components/layouts/SideBar.vue';
 export default {
 
   components: {
+    SideBar
   }
 }
 </script>
